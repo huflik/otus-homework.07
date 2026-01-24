@@ -3,7 +3,6 @@
 #include "iLogger.h"
 #include <vector>
 #include <memory>
-#include <ctime>
 
 class Processor {
 public:

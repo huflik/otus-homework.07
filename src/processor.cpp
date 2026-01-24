@@ -1,4 +1,5 @@
 #include "processor.h"
+#include <ctime>
 
 void Processor::Subscribe(std::shared_ptr<ILogger> logger) {
     loggers_.push_back(logger);
