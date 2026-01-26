@@ -1,9 +1,11 @@
 #include "parser.h"
+#include "processor.h"
 #include "consoleLogger.h"
 #include "fileLogger.h"
 
 #include <iostream>
 #include <cstdlib>
+#include <memory>
 
 int main(int argc, char* argv[]) {
 
@@ -12,10 +14,10 @@ int main(int argc, char* argv[]) {
 
     size_t n = std::stoul(argv[1]);
 
-    Processor processor;
+    auto processor = std::make_shared<Processor>();
 
-    processor.Subscribe(std::make_shared<ConsoleLogger>());
-    processor.Subscribe(std::make_shared<FileLogger>());
+    processor->Subscribe(std::make_shared<ConsoleLogger>());
+    processor->Subscribe(std::make_shared<FileLogger>());
 
     Parser parser(n, processor);
 

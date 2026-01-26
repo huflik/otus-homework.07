@@ -7,26 +7,26 @@ void Processor::Subscribe(std::shared_ptr<ILogger> logger) {
 
 void Processor::Add(const std::string& cmd) {
 
-    if (commands_.empty()) {
-        timestamp_ = std::time(nullptr);
+    if (current_.commands.empty()) {
+        current_.tiestamp = std::time(nullptr);
     }
 
-    commands_.push_back(cmd);
+    current_.commands.push_back(cmd);
 }
 
 void Processor::Finish() {
 
-    if (commands_.empty()) {
+    if (current_.commands.empty()) {
         return;
     }
 
     for (auto& logger : loggers_) {
-        logger->Log(commands_, timestamp_);
+        logger->Log(current_);
     }
 
-    commands_.clear();
+    current_.commands.clear();
 }
 
 bool Processor::IsEmpty() const {
-    return commands_.empty();
+    return current_.commands.empty();
 }

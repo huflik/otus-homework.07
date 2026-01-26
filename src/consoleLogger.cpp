@@ -1,16 +1,16 @@
 #include "consoleLogger.h"
 #include <iostream>
 
-void ConsoleLogger::Log(const std::vector<std::string>& cmds, std::time_t) {
+void ConsoleLogger::Log(const Bulk& bulk) {
 
     std::cout << "bulk: ";
 
-    for (size_t i = 0; i < cmds.size(); ++i) {
+    for (size_t i = 0; i < bulk.commands.size(); ++i) {
         if (i != 0) {
             std::cout << ", ";
         }
-        std::cout << cmds[i];
+        std::cout << bulk.commands[i];
     }
 
-    std::cout << std::endl;
+    std::cout << '\n' << std::flush;
 }

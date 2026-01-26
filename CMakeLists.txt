@@ -9,16 +9,12 @@ project(bulk VERSION ${PROJECT_VERSION})
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+add_subdirectory(src)
+
 
 add_compile_options(-Wall -Wextra -Wpedantic)
 
-add_executable(bulk
-    src/main.cpp
-    src/consoleLogger.cpp
-    src/fileLogger.cpp
-    src/parser.cpp
-    src/processor.cpp
-)
+
 
 target_include_directories(bulk
     PUBLIC 

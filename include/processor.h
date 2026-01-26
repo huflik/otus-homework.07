@@ -13,7 +13,6 @@ public:
     bool IsEmpty() const;
 
 private:
-    std::vector<std::string> commands_;
+    Bulk current_;
     std::vector<std::shared_ptr<ILogger>> loggers_;
-    std::time_t timestamp_{};
 };

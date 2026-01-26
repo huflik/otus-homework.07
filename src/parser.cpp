@@ -1,12 +1,12 @@
 #include "parser.h"
 
-Parser::Parser(size_t n, Processor& p) : n_(n), processor_(p) {}
+Parser::Parser(size_t n, std::shared_ptr<Processor> p) : n_(n), processor_(std::move(p)) {}
 
 void Parser::Process(const std::string& line) {
 
     if (line == "{") {
         if (depth_ == 0) {
-            processor_.Finish();
+            processor_->Finish();
         }
 
         ++depth_;
@@ -14,18 +14,21 @@ void Parser::Process(const std::string& line) {
     }
 
     if (line == "}") {
-        if (depth_ > 0 && --depth_ == 0) {
-            processor_.Finish();
+        if(depth_ == 0) {
+            return;
+        }
+        if (--depth_ == 0) {
+            processor_->Finish();
         }
         return;
     }
-    processor_.Add(line);
+    processor_->Add(line);
 
     if (depth_ == 0) {
         ++count_;
 
         if (count_ == n_) {
-            processor_.Finish();
+            processor_->Finish();
             count_ = 0;
         }
     }
@@ -34,6 +37,6 @@ void Parser::Process(const std::string& line) {
 void Parser::Eof() {
 
     if (depth_ == 0) {
-        processor_.Finish();
+        processor_->Finish();
     }
 }

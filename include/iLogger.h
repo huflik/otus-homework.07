@@ -1,10 +1,8 @@
 #pragma once
 
-#include <vector>
-#include <string>
-#include <ctime>
+#include "bulk.h"
 
 struct ILogger {
     virtual ~ILogger() = default;
-    virtual void Log(const std::vector<std::string>& cmds, std::time_t ts) = 0;
+    virtual void Log(const Bulk& bulk) = 0;
 };

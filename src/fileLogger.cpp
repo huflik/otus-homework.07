@@ -1,14 +1,14 @@
 #include "fileLogger.h"
 #include <fstream>
 
-void FileLogger::Log(const std::vector<std::string>& cmds, std::time_t ts) {
+void FileLogger::Log(const Bulk& bulk) {
 
-    std::ofstream out("bulk" + std::to_string(ts) + ".log");
+    std::ofstream out("bulk" + std::to_string(bulk.tiestamp) + ".log");
 
-    for (size_t i = 0; i < cmds.size(); ++i) {
+    for (size_t i = 0; i < bulk.commands.size(); ++i) {
         if (i != 0) {
             out << ", ";
         }
-        out << cmds[i];
+        out << bulk.commands[i];
     }
 }
