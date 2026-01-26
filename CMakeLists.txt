@@ -9,18 +9,17 @@ project(bulk VERSION ${PROJECT_VERSION})
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_subdirectory(src)
+enable_testing()
 
+add_subdirectory(src)
+add_subdirectory(tests)
 
 add_compile_options(-Wall -Wextra -Wpedantic)
-
-
 
 target_include_directories(bulk
     PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 
