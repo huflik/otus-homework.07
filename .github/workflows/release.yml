@@ -20,7 +20,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake build-essential doxygen
+          sudo apt-get install -y cmake build-essential libgtest-dev
+
+      - name: Build and install GTest
+        run: |
+          cd /usr/src/gtest
+          sudo cmake CMakeLists.txt
+          sudo make
+          sudo cp lib/*.a /usr/lib
       
       - name: Configure CMake
         run: cmake -B build -DPATCH_VERSION=${{ github.run_number }}
